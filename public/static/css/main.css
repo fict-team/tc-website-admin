@@ -1,0 +1,43 @@
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100vh;
+  margin-top: 12px;
+}
+
+body > div {
+  height: 100vh;
+}
+
+.breadcrumb a {
+  color: #20a8d8;
+}
+
+.breadcrumb li.is-active a {
+  color: #73818f;
+}
+
+.menu-label {
+  color: #fff;
+  font-weight: 500;
+}
+
+.menu-list a {
+  color: #fff;
+}
+
+.menu-list a.is-active {
+  background-color: #3a4248;
+}
+
+.menu-list a:hover {
+  background-color: #20a8d8;
+  color: #fff
+}
+
+.menu-list > li > a > span.icon {
+  float: right;
+  display: inline;
+}
