@@ -6,13 +6,14 @@ import Permissions from '../../components/Permissions';
 import BoxTitle from '../../components/BoxTitle';
 
 import { UserPermission } from '../../core/authorization';
+import { makeRoute } from '../../components/Navbar';
 
-const Users = () => {
+const Page = () => {
   const permissions = {};
   Object.keys(UserPermission).forEach(k => permissions[k] = false);
   return (
     <Container
-      breadcrumb={[{ title: 'Administration' }, { title: 'Users', href: '/users' }, { title: 'Create', active: true }]}
+      breadcrumb={makeRoute(['administration', 'users', 'users/create'])}
     >
       <div className="columns" style={{ margin: 0 }}>
         <div className="column">
@@ -35,10 +36,10 @@ const Users = () => {
   );
 };
 
-Users.getInitialProps = async () => {
+Page.getInitialProps = async () => {
   return {
-    namespacesRequired: ['common', 'sidemenu'],
+    namespacesRequired: ['common', 'sidemenu', 'permissions'],
   };
 };
 
-export default Redux(Login(Users));
+export default Redux(Login(Page));

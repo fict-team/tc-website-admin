@@ -45,8 +45,8 @@ export const getAuthorization = async () => {
 };
 
 export const setAuthorization = (accessToken, refreshToken) => {
-  localStorage.setItem('wap_access', accessToken);
-  localStorage.setItem('wap_refresh', refreshToken);
+  localStorage[accessToken ? 'setItem' : 'removeItem']('wap_access', accessToken);
+  localStorage[refreshToken ? 'setItem' : 'removeItem']('wap_refresh', refreshToken);
 };
 
 export const updateToken = async (refreshToken: string) => {

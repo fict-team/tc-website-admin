@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import IState from "../core/store";
 import { IUser } from "../core/authorization";
 import Icon from "./Icon";
+import { setAuthorization } from "../core/api";
 
 export type BreadcrumbItem = {
   href?: string;
@@ -13,8 +14,35 @@ export type NavbarProps = {
   breadcrumb?: BreadcrumbItem[];
 };
 
+const routes = {
+  'general': { title: 'General', href: null },
+  'dashboard': { title: 'Dashboard', href: '/' },
+  'pages': { title: 'Pages', href: '/pages' },
+  'news': { title: 'News', href: '/news' },
+  'events': { title: 'Events', href: '/events' },
+
+  'administration': { title: 'Administration', href: null },
+  'statistics': { title: 'Statistics', href: '/stats' },
+  'bots': { title: 'Bots', href: '/bots' },
+
+  'users': { title: 'Users', href: '/users' },
+  'users/create': { title: 'Create', href: '/users/create' },
+
+  'settings': { title: 'Settings', href: '/settings' },
+};
+
+export const makeRoute = (path: string[]): BreadcrumbItem[] => path.map((p, i) => {
+  const data = routes[p];
+  if (!data) { return { title: p, href: 'null', active: true }; }
+  return {
+    ...data,
+    active: i === (path.length - 1),
+  };
+});
+
 export default (props: NavbarProps) => {
   const { breadcrumb = [] } = props;
+  const dispatch = useDispatch();
   const user = useSelector<IState>(state => state.user) as IUser;
 
   return (
@@ -31,7 +59,7 @@ export default (props: NavbarProps) => {
         <div className="navbar-start">
           <nav className="breadcrumb" aria-label="breadcrumbs" style={{ margin: 'auto 0 auto 15px' }}>
             <ul>
-              <li><Icon style={{ display: 'inline' }} icon="fa-home"></Icon></li>
+              <li key="home"><Icon style={{ display: 'inline' }} icon="fa-home"></Icon> </li>
               {breadcrumb.map(i => <li key={i.title} className={i.active ? 'is-active' : ''}><a href={i.href}>{i.title}</a></li>)}
             </ul>
           </nav>
@@ -50,7 +78,16 @@ export default (props: NavbarProps) => {
                   Settings
                 </a>
                 <hr className="navbar-divider" />
-                <a className="navbar-item">
+                <a 
+                  className="navbar-item" 
+                  onClick={() => {
+                    setAuthorization(null, null);
+                    dispatch({
+                      type: 'authorize',
+                      logout: true,
+                    });
+                  }}
+                >
                   <Icon icon="fa-sign-out-alt" style={{ marginRight: '6px' }} />
                   Logout
                 </a>

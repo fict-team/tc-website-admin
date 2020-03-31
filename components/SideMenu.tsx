@@ -1,6 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 import Icon from './Icon';
 import Translation, { TranslationProps } from '../components/middlewares/Translation';
+import Link from 'next/link';
 
 export type SideMenuProps = InputHTMLAttributes<HTMLDivElement> & TranslationProps & {
   page?: string;
@@ -64,12 +65,12 @@ export default Translation('sidemenu')((props: SideMenuProps) => {
   const { t, tReady, ...other } = props;
 
   const items = content.map((v) => {
-    const listItems = v.list.map(v => <li><a href={v.href}>{t(v.title)}{v.icon && <Icon position="right" icon={v.icon} />}</a></li>);
+    const listItems = v.list.map(v => <li key={v.title}><Link href={v.href}><a>{t(v.title)}{v.icon && <Icon position="right" icon={v.icon} />}</a></Link></li>);
     return (
-      <>
+      <div key={v.label}>
         <p className="menu-label">{t(v.label)}</p>
         <ul className="menu-list">{listItems}</ul>
-      </>
+      </div>
     )
   });
 
