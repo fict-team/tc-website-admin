@@ -19,7 +19,8 @@
     "react-dom": "16.13.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "swr": "^0.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.3",

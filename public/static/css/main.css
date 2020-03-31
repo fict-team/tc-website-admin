@@ -63,3 +63,9 @@ body > div {
 .menu > div:not(:last-child) {
   margin-bottom: 1em;
 }
+
+tr > th, td {
+  white-space: nowrap;
+  text-align: center!important;
+  vertical-align: middle!important;
+}

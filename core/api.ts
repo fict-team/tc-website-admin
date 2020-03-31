@@ -74,6 +74,16 @@ export class Request implements IRequest {
     Object.assign(this, data);
   }
 
+  public static fetcher(auth: boolean = true) {
+    return async (url: string) => {
+      const { data } = await Request.create('get')
+        .authorize(auth)
+        .exec(url);
+        
+      return data;
+    }
+  }
+
   public static create(method: Method) {
     return new Request({ method });
   }
