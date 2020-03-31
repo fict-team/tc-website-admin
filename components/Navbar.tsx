@@ -3,9 +3,18 @@ import IState from "../core/store";
 import { IUser } from "../core/authorization";
 import Icon from "./Icon";
 
-export type NavbarProps = {};
+export type BreadcrumbItem = {
+  href?: string;
+  title: string;
+  active?: boolean;
+}
+
+export type NavbarProps = {
+  breadcrumb?: BreadcrumbItem[];
+};
 
 export default (props: NavbarProps) => {
+  const { breadcrumb = [] } = props;
   const user = useSelector<IState>(state => state.user) as IUser;
 
   return (
@@ -22,10 +31,8 @@ export default (props: NavbarProps) => {
         <div className="navbar-start">
           <nav className="breadcrumb" aria-label="breadcrumbs" style={{ margin: 'auto 0 auto 15px' }}>
             <ul>
-              <li><a href="#">Bulma</a></li>
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Components</a></li>
-              <li className="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+              <li><Icon style={{ display: 'inline' }} icon="fa-home"></Icon></li>
+              {breadcrumb.map(i => <li key={i.title} className={i.active ? 'is-active' : ''}><a href={i.href}>{i.title}</a></li>)}
             </ul>
           </nav>
         </div>

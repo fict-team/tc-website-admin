@@ -1,14 +1,15 @@
 import { ReactNode } from 'react';
 
 import SideMenu from '../components/SideMenu';
-import Navbar from '../components/Navbar';
+import Navbar, { BreadcrumbItem } from '../components/Navbar';
 
 export type ContainerProps = {
   children?: ReactNode;
+  breadcrumb?: BreadcrumbItem[];
 };
 
 export default (props: ContainerProps) => {
-  const { children } = props;
+  const { children, breadcrumb } = props;
 
   return (
     <div style={{ height: '100%' }}>
@@ -17,7 +18,7 @@ export default (props: ContainerProps) => {
           <SideMenu />
         </div>
         <div className="column" style={{ margin: 0, padding: 0 }}>
-          <Navbar />
+          <Navbar breadcrumb={breadcrumb} />
           <div style={{ padding: '15px' }}>
             {children}
           </div>

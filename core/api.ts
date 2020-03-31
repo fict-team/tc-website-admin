@@ -35,7 +35,7 @@ export const getAuthorization = async () => {
     setAuthorization(accessToken, refreshToken);
   }
 
-  console.log(data);
+  //console.log(data);
 
   return {
     access: accessToken,

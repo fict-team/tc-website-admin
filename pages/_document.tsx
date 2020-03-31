@@ -11,6 +11,7 @@ export default class extends Document {
       <Html>
         <Head>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.1/css/bulma.min.css" />
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-tooltip@3.0.2/dist/css/bulma-tooltip.min.css" />
           <link rel="stylesheet" href="/static/css/main.css" />
           <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" />
         </Head>

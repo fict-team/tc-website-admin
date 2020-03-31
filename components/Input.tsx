@@ -3,13 +3,13 @@ import Icon from './Icon';
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & { 
   icon?: string;
+  ['data-tooltip']?: string;
 };
 
 export default (props: InputProps) => {
-  const { icon = null, ...other } = props;
-
+  const { className, ["data-tooltip"]: tooltip, icon = null, ...other } = props;
   return (
-    <div className="field">
+    <div className={`field ${className ? className : ''}`} data-tooltip={tooltip}>
       <div className={`control ${icon ? 'has-icons-left' : ''}`}>
           <input className="input" {...other} />
           {icon && <Icon icon={icon} />}

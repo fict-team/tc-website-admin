@@ -2,7 +2,9 @@ import { InputHTMLAttributes } from 'react';
 import Icon from './Icon';
 import Translation, { TranslationProps } from '../components/middlewares/Translation';
 
-export type SideMenuProps = InputHTMLAttributes<HTMLDivElement> & TranslationProps & {};
+export type SideMenuProps = InputHTMLAttributes<HTMLDivElement> & TranslationProps & {
+  page?: string;
+};
 
 const content = [
   { 

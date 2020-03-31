@@ -41,3 +41,21 @@ body > div {
   float: right;
   display: inline;
 }
+
+.permissions {
+  margin-bottom: -10px;
+}
+
+.permissions > .tag:not(:last-child) {
+  margin-right: 10px;
+}
+
+.permissions > .tag {
+  margin-bottom: 10px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
