@@ -2,14 +2,17 @@ FROM node:13.10.1
 
 WORKDIR /app
 
+COPY package.json /app
+COPY yarn.lock /app
+
+RUN npm i -g yarn
+
+RUN yarn install
+
 COPY . /app
 
-RUN npm install
-
-RUN npm run build
-
-COPY .next /app/.next
+RUN yarn build
 
 EXPOSE 3000
 
-ENTRYPOINT npm run start
+ENTRYPOINT yarn start
