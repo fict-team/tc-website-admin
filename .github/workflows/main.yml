@@ -17,7 +17,7 @@ jobs:
         password: ${{ secrets.DO_PASSWORD }}
         port: ${{ secrets.DO_PORT }}
         script: |
-         cd ./api
+         cd ./admin
          ./update.sh
          ./build.sh
          ./deploy.sh
