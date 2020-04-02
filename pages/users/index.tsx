@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import { makeRoute } from '../../components/Navbar';
 import { Request } from '../../core/api';
+import { useState } from 'react';
 
 const UserRow = (props) => {
   const { id, username, email, createdAt } = props;
@@ -39,7 +40,8 @@ const UserRow = (props) => {
 };
 
 const Page = () => {
-  const { data, error } = useSWR('/users?take=10', Request.fetcher(true));
+  const [query, setQuery] = useState('');
+  const { data, error } = useSWR(() => (query.length === 0) ? '/users?take=15' : `/users?username=%${encodeURI(query)}%`, Request.fetcher(true));
 
   return (
     <Container
@@ -47,13 +49,13 @@ const Page = () => {
     >
       <div className="field has-addons">
         <div className="control">
-          <input className="input" type="text" placeholder="Find a user" />
+          <input className="input" type="text" placeholder="Search by username..." onChange={(e) => setQuery(e.target.value)} />
         </div>
-        <div className="control">
-          <a className="button is-info">
-            Search
+        <p className="control">
+          <a className="button is-static">
+            <Icon icon="fa-search" />
           </a>
-        </div>
+        </p>
         <Link href="/users/create">
           <button className="button is-info" style={{ marginLeft: '10px' }}>
             <Icon icon="fa-user-plus" style={{ marginRight: '10px' }} />

@@ -8,11 +8,23 @@ export type PermissionProps = TranslationProps & {
 };
 
 export const Permission = Translation('permissions')((props: PermissionProps) => {
-  const { t, title, defaultValue } = props;
+  const { t, onValueChange, title, defaultValue } = props;
   const [value, setValue] = useState(defaultValue ?? true);
 
   return (
-    <span onClick={() => setValue(!value)} className={`tag is-${value ? 'success' : 'danger'}`}>{t(title)}</span>
+    <span 
+    className={`tag is-${value ? 'success' : 'danger'}`}
+    onClick={() => { 
+      const v = !value;
+      setValue(v);
+      
+      if (onValueChange) { 
+        onValueChange(v);
+      }
+    }} 
+    >
+      {t(title)}
+    </span>
   );
 });
 
