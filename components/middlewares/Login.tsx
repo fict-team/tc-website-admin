@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Request, setAuthorization, getLocalTokens } from "../../core/api";
 import IState from "../../core/store";
 import { IUser } from "../../core/authorization";
+import ErrorMessage from "../ErrorMessage";
 
 export default (Component) => {
   const withLogin = (props) => {
@@ -12,6 +13,8 @@ export default (Component) => {
     const isMounted = useRef(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
       if (!user) {
@@ -55,27 +58,44 @@ export default (Component) => {
                             onChange={(e) => setPassword(e.target.value)}
                           />
                           <button 
-                            className="button is-block is-info is-fullwidth"
+                            className={`button is-block is-info is-fullwidth ${loading ? 'is-loading' : ''}`}
+                            disabled={loading}
                             onClick={async () => {
-                              const { data } = await Request.create('POST')
-                                .data({ username, password })
-                                .exec('/token');
+                              setLoading(true);
 
-                              const { access_token: accessToken, refresh_token: refreshToken } = data;
-                              setAuthorization(accessToken, refreshToken);
+                              try {
+                                const { data } = await Request.create('POST')
+                                  .data({ username, password })
+                                  .exec('/token');
+
+                                const { access_token: accessToken, refresh_token: refreshToken } = data;
+                                setAuthorization(accessToken, refreshToken);
+
+                                if (isMounted) {
+                                  dispatch({
+                                    type: 'authorize',
+                                    accessToken,
+                                    refreshToken,
+                                  });
+                                }
+                              } catch(err) {
+                                if (isMounted) {
+                                  setError(err);
+                                }
+                              }
 
                               if (isMounted) {
-                                dispatch({
-                                  type: 'authorize',
-                                  accessToken,
-                                  refreshToken,
-                                });
+                                setLoading(false);
                               }
                             }}
                           >
                             Login
                           </button>
                         </div>
+                        {
+                          error &&
+                          <ErrorMessage error={error} />
+                        }
                     </div>
                 </div>
             </div>

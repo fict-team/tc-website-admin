@@ -4,12 +4,45 @@ import Container from '../../components/Container';
 import Input from '../../components/Input';
 import Permissions from '../../components/Permissions';
 import BoxTitle from '../../components/BoxTitle';
+import ErrorMessage from '../../components/ErrorMessage';
+import Icon from '../../components/Icon';
+import Router from 'next/router';
 
 import { UserPermission } from '../../core/authorization';
 import { makeRoute } from '../../components/Navbar';
 import { useState, useRef } from 'react';
 import { Request } from '../../core/api';
-import ErrorMessage from '../../components/ErrorMessage';
+
+const ResultModal = ({ response, onClose }) => {
+  console.log(response);
+  return (
+    <div className={`modal ${response ? 'is-active' : ''}`}>
+      <div className="modal-background"></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">Credentials</p>
+        </header>
+        <section className="modal-card-body">
+          <Input type="text" readOnly value={response?.username ?? ''} icon="fa-user" />
+          <div className="field has-addons">
+            <div className="control has-icons-left" style={{ width: '100%' }}>
+              <input className="input" type="text" readOnly value={response?.password ?? ''} />
+              <Icon icon="fa-lock" />
+            </div>
+            <p className="control">
+              <a className="button is-info">
+                Copy
+              </a>
+            </p>
+          </div>
+        </section>
+        <footer className="modal-card-foot">
+          <button className="button" onClick={() => onClose()}>Continue</button>
+        </footer>
+      </div>
+    </div>
+  );
+};
 
 const Page = () => {
   const isMounted = useRef(true);
@@ -23,13 +56,13 @@ const Page = () => {
 
   const [permissions, setPermissions] = useState(defaultPermissions);
 
-  console.log(permissions);
-
   return (
     <Container
       breadcrumb={makeRoute(['administration', 'users', 'users/create'])}
+      permissions={[UserPermission.MANAGE_USERS]}
     >
       <div className="columns" style={{ margin: 0 }}>
+        <ResultModal response={response?.data} onClose={() => Router.push('/users')} />
         <div className="column">
           <div className="box">
             <BoxTitle>Account Details</BoxTitle>
@@ -49,12 +82,12 @@ const Page = () => {
               
               let response;
               try {
-                const user = await Request.create('put')
+                const { data: { user } } = await Request.create('put')
                   .authorize()
                   .data(
                     { 
                       username, 
-                      email, 
+                      email: email.length === 0 ? null : email, 
                       permissions: Object.keys(permissions).filter(p => permissions[p]),
                     }
                   )

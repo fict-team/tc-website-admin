@@ -1,15 +1,18 @@
 import { ReactNode } from 'react';
 
 import SideMenu from '../components/SideMenu';
+import Protected from '../components/middlewares/Protected';
 import Navbar, { BreadcrumbItem } from '../components/Navbar';
+import { UserPermission } from '../core/authorization';
 
 export type ContainerProps = {
   children?: ReactNode;
   breadcrumb?: BreadcrumbItem[];
+  permissions?: UserPermission[];
 };
 
 export default (props: ContainerProps) => {
-  const { children, breadcrumb } = props;
+  const { children, breadcrumb, permissions } = props;
 
   return (
     <div style={{ height: '100%' }}>
@@ -20,7 +23,11 @@ export default (props: ContainerProps) => {
         <div className="column" style={{ margin: 0, padding: 0 }}>
           <Navbar breadcrumb={breadcrumb} />
           <div style={{ padding: '15px' }}>
-            {children}
+            {
+              permissions 
+                ? <Protected permissions={permissions}>{children}</Protected>
+                : children
+            }
           </div>
         </div>
       </div>

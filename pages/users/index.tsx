@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { makeRoute } from '../../components/Navbar';
 import { Request } from '../../core/api';
 import { useState } from 'react';
+import { UserPermission } from '../../core/authorization';
 
 const UserRow = (props) => {
   const { id, username, email, createdAt } = props;
@@ -46,6 +47,7 @@ const Page = () => {
   return (
     <Container
       breadcrumb={makeRoute(['administration', 'users'])}
+      permissions={[UserPermission.MANAGE_USERS]}
     >
       <div className="field has-addons">
         <div className="control">
