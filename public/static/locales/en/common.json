@@ -1,3 +1,13 @@
 {
-  
+  "general": "General",
+  "dashboard": "Dashboard",
+  "pages": "Pages",
+  "news": "News",
+  "events": "Events",
+  "administration": "Administration",
+  "statistics": "Statistics",
+  "bots": "Bots",
+  "users": "Users",
+  "settings": "Settings",
+  "profile": "Profile"
 }

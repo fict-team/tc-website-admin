@@ -48,6 +48,7 @@ const Page = () => {
     <Container
       breadcrumb={makeRoute(['administration', 'users'])}
       permissions={[UserPermission.MANAGE_USERS]}
+      page="users"
     >
       <div className="field has-addons">
         <div className="control">

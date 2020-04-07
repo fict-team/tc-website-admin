@@ -14,7 +14,6 @@ import { useState, useRef } from 'react';
 import { Request } from '../../core/api';
 
 const ResultModal = ({ response, onClose }) => {
-  console.log(response);
   return (
     <div className={`modal ${response ? 'is-active' : ''}`}>
       <div className="modal-background"></div>
@@ -60,6 +59,7 @@ const Page = () => {
     <Container
       breadcrumb={makeRoute(['administration', 'users', 'users/create'])}
       permissions={[UserPermission.MANAGE_USERS]}
+      page="users"
     >
       <div className="columns" style={{ margin: 0 }}>
         <ResultModal response={response?.data} onClose={() => Router.push('/users')} />

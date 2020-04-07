@@ -8,8 +8,9 @@ import { UserPermission } from '../../core/authorization';
 const Page = () => {
   return (
     <Container
-      breadcrumb={makeRoute(['administration', 'events'])}
+      breadcrumb={makeRoute(['general', 'events'])}
       permissions={[UserPermission.MANAGE_EVENTS]}
+      page="events"
     >
     </Container>
   );

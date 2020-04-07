@@ -10,6 +10,7 @@ const Page = () => {
     <Container
       breadcrumb={makeRoute(['administration', 'statistics'])}
       permissions={[UserPermission.VIEW_LOGS]}
+      page="statistics"
     >
     </Container>
   );

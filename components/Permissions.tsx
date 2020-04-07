@@ -9,16 +9,15 @@ export type PermissionProps = TranslationProps & {
 
 export const Permission = Translation('permissions')((props: PermissionProps) => {
   const { t, onValueChange, title, defaultValue } = props;
-  const [value, setValue] = useState(defaultValue ?? true);
+  const [value, setValue] = useState(defaultValue);
 
   return (
     <span 
     className={`tag is-${value ? 'success' : 'danger'}`}
     onClick={() => { 
-      const v = !value;
-      setValue(v);
-      
       if (onValueChange) { 
+        const v = !value;
+        setValue(v);
         onValueChange(v);
       }
     }} 
@@ -30,12 +29,13 @@ export const Permission = Translation('permissions')((props: PermissionProps) =>
 
 export type PermissionsProps = HTMLAttributes<HTMLDivElement> & { 
   permissions: string[];
+  value?: boolean;
   onValueChange?: (key: string, value: boolean) => void; 
 };
 
 export default (props: PermissionsProps) => {
-  const { permissions, onValueChange, ...other } = props;
-  const elements = permissions.map(p => <Permission key={p} title={p} defaultValue={false} onValueChange={(v) => onValueChange && onValueChange(p, v)} />);
+  const { permissions, onValueChange, value, ...other } = props;
+  const elements = permissions.map(p => <Permission key={p} title={p} defaultValue={value} onValueChange={onValueChange ? (v) => onValueChange(p, v) : null} />);
 
   return <div className="permissions" {...other}>{elements}</div>;
 };

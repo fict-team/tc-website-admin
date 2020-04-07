@@ -8,8 +8,9 @@ import { UserPermission } from '../../core/authorization';
 const Page = () => {
   return (
     <Container
-      breadcrumb={makeRoute(['administration', 'pages'])}
+      breadcrumb={makeRoute(['general', 'pages'])}
       permissions={[UserPermission.MANAGE_PAGES]}
+      page="pages"
     >
     </Container>
   );

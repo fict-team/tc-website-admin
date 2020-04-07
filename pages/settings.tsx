@@ -10,6 +10,7 @@ const Page = () => {
     <Container
       breadcrumb={makeRoute(['administration', 'settings'])}
       permissions={[UserPermission.EDIT_SETTINGS]}
+      page="settings"
     >
     </Container>
   );
