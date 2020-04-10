@@ -1,6 +1,7 @@
 import axios, { Method, AxiosRequestConfig } from 'axios';
 import jwt from 'jsonwebtoken';
 import { IUser } from './authorization';
+import { useState, useRef } from 'react';
 
 export const getURL = () => process.env.API_URL;
 
@@ -103,7 +104,42 @@ export class Request implements IRequest {
     return this;
   }
 
-  public async exec(endpoint: string) {
+  public hook(endpoint: string) {
+    const isMounted = useRef(true);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    return {
+      data,
+      error,
+      loading,
+      reset: () => {
+        setData(null);
+        setError(null);
+        setLoading(false);
+      },
+      exec: async (query?: Object) => {
+        let response = null;
+
+        setLoading(true);
+
+        try {
+          const { data } = await this.exec(endpoint, query);
+          if (isMounted) { setData(data); }
+          response = data;
+        } catch (err) {
+          if (isMounted) { setError(err); }
+        }
+
+        if (isMounted) { setLoading(false); }
+
+        return response;
+      },
+    };
+  }
+
+  public async exec(endpoint: string, data?: Object) {
     const query: AxiosRequestConfig = {
       method: this.method,
       url: `${getURL()}${endpoint}`,
@@ -111,6 +147,10 @@ export class Request implements IRequest {
       data: this.body,
       headers: {},
     };
+
+    if (data) {
+      query[this.method.toLowerCase() === 'get' ? 'params' : 'body'] = data;
+    }
 
     if (this.auth) {
       try {

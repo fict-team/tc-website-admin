@@ -1,11 +1,11 @@
 {
-  "MANAGE_USERS": "Manage Users",
-  "MANAGE_PAGES": "Manage Pages",
-  "MANAGE_PROFILES": "Manage Profiles",
-  "MANAGE_FILES": "Manage Files",
-  "MANAGE_NEWS": "Manage News",
-  "MANAGE_EVENTS": "Manage Events",
-  "MANAGE_MANUALS": "Manage Manuals",
-  "VIEW_LOGS": "View Logs",
-  "EDIT_SETTINGS": "Edit Settings"
+  "manage_users": "Manage Users",
+  "manage_pages": "Manage Pages",
+  "manage_profiles": "Manage Profiles",
+  "manage_files": "Manage Files",
+  "manage_news": "Manage News",
+  "manage_events": "Manage Events",
+  "manage_manuals": "Manage Manuals",
+  "view_logs": "View Logs",
+  "edit_settings": "Edit Settings"
 }
