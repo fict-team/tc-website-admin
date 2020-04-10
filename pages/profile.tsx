@@ -19,15 +19,20 @@ import Modal from '../components/Modal';
 const formatIp = (ip: string) => ip.substr(0, 7) == '::ffff:' ? ip.substr(7) : ip;
 
 const SessionRow = ({ session, onDelete }) => {
-  const { fingerprint: fp, createdAt } = session;
+  const { fingerprint: fp, createdAt, current } = session;
   const date = moment(createdAt).format('HH:mm:ss · DD.MM.YYYY')
   return (
     <div className="box">
       <p>
         <b>{fp.id.substr(0, 16)}</b>
-        <a className="has-text-danger" onClick={() => onDelete()} style={{ float: 'right' }}>
-          <Icon icon="fa-times" size='small' />
-        </a>
+        {
+          current 
+           ? <b className="has-text-success" style={{ float: 'right' }}>Active</b>
+           : 
+            <a className="has-text-danger" onClick={() => onDelete()} style={{ float: 'right' }}>
+              <Icon icon="fa-times" size='small' />
+            </a>
+        }
       </p>
       <p className="has-text-grey">{fp.browser} ({fp.os})</p>
       <p className="has-text-grey-light">
@@ -63,7 +68,7 @@ const PasswordChangeModal = ({ active, onClose }) => {
             const data = await exec();
             if (data) {
               console.log(data);
-              
+
               const { access_token: accessToken, refresh_token: refreshToken } = data;
               setAuthorization(accessToken, refreshToken);
 
