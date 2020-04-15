@@ -2,12 +2,15 @@
   "general": "General",
   "dashboard": "Dashboard",
   "pages": "Pages",
-  "news": "News",
+  "articles": "Articles",
   "events": "Events",
   "administration": "Administration",
   "statistics": "Statistics",
   "bots": "Bots",
   "users": "Users",
   "settings": "Settings",
-  "profile": "Profile"
+  "profile": "Profile",
+  "UKRAINIAN": "Ukrainian",
+  "RUSSIAN": "Russian",
+  "ENGLISH": "English"
 }

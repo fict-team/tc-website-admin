@@ -12,8 +12,10 @@ export default class extends Document {
         <Head>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.1/css/bulma.min.css" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-tooltip@3.0.2/dist/css/bulma-tooltip.min.css" />
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-switch@2.0.0/dist/css/bulma-switch.min.css" />
           <link rel="stylesheet" href="/static/css/main.css" />
           <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" />
+          <script defer src="/static/scripts/tinymce/tinymce.min.js" />
         </Head>
         <body>
           <Main />

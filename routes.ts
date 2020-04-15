@@ -13,8 +13,8 @@ export const tabs = [
         icon: 'fa-file-alt',
       },
       {
-        href: '/news',
-        title: 'news',
+        href: '/articles',
+        title: 'articles',
         icon: 'fa-newspaper',
       },
       {
@@ -56,7 +56,7 @@ export const routes = {
   'general': { title: 'General', href: null },
   'dashboard': { title: 'Dashboard', href: '/' },
   'pages': { title: 'Pages', href: '/pages' },
-  'news': { title: 'News', href: '/news' },
+  'articles': { title: 'Articles', href: '/articles' },
   'events': { title: 'Events', href: '/events' },
 
   'administration': { title: 'Administration', href: null },

@@ -3,7 +3,7 @@ export enum UserPermission {
   MANAGE_PAGES = 'manage_pages',
   MANAGE_PROFILES = 'manage_profiles',
   MANAGE_FILES = 'manage_files',
-  MANAGE_NEWS = 'manage_news',
+  MANAGE_ARTICLES = 'manage_articles',
   MANAGE_EVENTS = 'manage_events',
   MANAGE_MANUALS = 'manage_manuals',
   VIEW_LOGS = 'view_logs',

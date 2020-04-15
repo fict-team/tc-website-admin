@@ -73,3 +73,20 @@ tr > th, td {
 hr {
   margin: 12px 0;
 }
+
+.tox-statusbar__branding {
+  display: none!important;
+}
+
+.tox.tox-silver-sink.tox-tinymce-aux {
+  height: 0;
+}
+
+.switch[type=checkbox]+label {
+  padding-top: 0;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
